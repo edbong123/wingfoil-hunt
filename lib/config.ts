@@ -11,8 +11,9 @@ export const config = {
   siteUrl: (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/$/, ""),
   sessionSecret: process.env.SESSION_SECRET ?? "",
   adminPassword: process.env.ADMIN_PASSWORD ?? "",
-  supabaseUrl: process.env.SUPABASE_URL ?? "",
-  supabaseServiceKey: process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
+  // Accept the names the Vercel Supabase integration may inject.
+  supabaseUrl: process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+  supabaseServiceKey: process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY || "",
   anthropicModel: process.env.ANTHROPIC_MODEL || "claude-opus-5-5",
   igAppId: process.env.IG_APP_ID ?? "",
   igAppSecret: process.env.IG_APP_SECRET ?? "",
