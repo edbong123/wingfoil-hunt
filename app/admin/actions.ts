@@ -1,19 +1,13 @@
 "use server";
 import crypto from "node:crypto";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { handleIncoming } from "@/lib/bot";
 import { config } from "@/lib/config";
 import { db, type Submission } from "@/lib/db";
 import { sendDM } from "@/lib/instagram";
 import { closeRoundAndPublish, getOrCreateOpenRound } from "@/lib/rounds";
+import { requireAdmin } from "@/lib/admin-auth";
 
-// Server actions can be invoked from any path, so re-check admin auth here (middleware only guards /admin).
-async function requireAdmin() {
-  const auth = (await headers()).get("authorization") ?? "";
-  const given = auth.startsWith("Basic ") ? Buffer.from(auth.slice(6), "base64").toString().split(":")[1] : "";
-  if (!config.adminPassword || given !== config.adminPassword) throw new Error("unauthorized");
-}
 
 const done = (msg: string): never => redirect("/admin?notice=" + encodeURIComponent(msg));
 

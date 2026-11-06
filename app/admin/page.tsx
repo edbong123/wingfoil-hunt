@@ -51,7 +51,7 @@ export default async function Admin({ searchParams }: { searchParams: Promise<{ 
     <main className="wrap" style={{ maxWidth: 960 }}>
       <header className="top">
         <h1>Hunt admin</h1>
-        <nav><a href="/">Voting page</a></nav>
+        <nav><a href="/admin/sim">Simulator</a> <a href="/">Voting page</a></nav>
       </header>
       {notice && <div className="notice">{notice}</div>}
 

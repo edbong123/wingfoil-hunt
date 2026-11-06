@@ -10,7 +10,7 @@ export async function storeRemoteMedia(
   url: string,
   kind: "image" | "video",
 ): Promise<{ publicUrl: string; path: string; contentType: string }> {
-  const res = await fetch(url);
+  const res = await fetch(url, { headers: { "User-Agent": "WingfoilHunt/0.1 (+https://wingfoil-hunt.vercel.app)" } });
   if (!res.ok) throw new Error(`media download failed: ${res.status}`);
   const contentType = res.headers.get("content-type")?.split(";")[0] ?? (kind === "image" ? "image/jpeg" : "video/mp4");
   const buf = Buffer.from(await res.arrayBuffer());
